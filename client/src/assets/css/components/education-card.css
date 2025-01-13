@@ -1,0 +1,127 @@
+
+/* 
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+} */
+
+.grid {
+    display: grid;
+    grid-template-columns:repeat(2, 1fr) !important;
+    gap: 10px;
+    /* background-color:var(--track-bg); */
+}
+
+.card-custom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100px;
+    padding: 10px;
+    border-radius: 8px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    position:absolute;
+    top:-25px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.icon-container {
+    background-color:var(--bg-green) !important;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    padding: 10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center !important;
+}
+
+span.icon i {
+    text-align:center;
+    color:var(--green) !important;
+    font-weight:bold;
+}
+span.direction i {
+    text-align:center;
+    color:black !important;
+    font-weight:bold;
+    font-size:80px;
+}
+
+.arrow-container {
+    display: flex;
+    justify-content: center;
+}
+
+.arrow {
+    width: 24px;
+    height: 24px;
+}
+
+/* Couleurs spécifiques pour chaque carte */
+.card-primary {
+    background-color:rgb(124, 161, 202) !important;
+    color:var(--white) !important;
+}
+
+.card-primary:hover {
+    background-color: #cce5ff;
+}
+
+
+
+.card-college {
+    background-color:rgb(156, 213, 216) !important;
+}
+
+.card-college:hover {
+    background-color: #b3e0ff;
+}
+
+
+
+.card-lycee {
+    background-color:rgb(255, 217, 179) !important;
+}
+
+.card-lycee:hover {
+    background-color: #99ccff;
+}
+
+
+
+.card-university {
+    background-color:rgb(255, 231, 153) !important;
+}
+
+.card-university:hover {
+    background-color: #80bfff;
+}
+
+
+
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
+}

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero Section</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Global Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Open Sans', sans-serif;
+    }
+  
+    .hero {
+  display: flex;
+  flex-direction: column; /* Place les éléments verticalement */
+  align-items: center;
+  justify-content: center;
+  background-color: #3A4DA0; /* Bleu Hero */
+  color: white;
+  height: 100vh;
+  padding: 20px;
+  position: relative; /* Nécessaire pour positionner la carte */
+}
+
+/* Contenu du Hero */
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+}
+
+  
+    .hero-text-left {
+      flex: 1;
+      padding-right: 20px;
+    }
+  
+    .hero-text-left h2 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+  
+    .hero-text-left p {
+      font-size: 1.2rem;
+    }
+  
+    .hero-divider {
+      width: 5px;
+      height: 60%;
+      background-color: #FFA500; /* Orange */
+      margin: 0 30px;
+    }
+  
+    .hero-text-center {
+      flex: 1;
+      text-align: center;
+    }
+  
+    .hero-text-center .dynamic-text {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  
+    .hero-image {
+      flex: 1;
+      text-align: right;
+    }
+  
+    .hero-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px; /* Ajoute un effet élégant */
+    }
+  
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .hero-content {
+        flex-direction: column; /* Superposition sur les écrans moyens */
+        text-align: center;
+      }
+    /* Carte de recherche */
+.hero-search-card {
+  position: absolute; /* Place la carte au bas de la section */
+  bottom: 30px; /* Distance du bas */
+  left: 50%; /* Centre horizontalement */
+  transform: translateX(-50%); /* Ajuste pour centrer précisément */
+  background-color: #fff !important;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Ombre élégante */
+  text-align: center;
+  width: 100%;
+  max-width: 600px; /* Largeur maximum de la carte */
+}
+
+/* Barre de recherche */
+.search-bar {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.search-bar:focus {
+  box-shadow: 0 0 8px rgba(58, 77, 160, 0.4);
+}
+      .hero-text-left {
+        padding-right: 0;
+        margin-bottom: 20px;
+      }
+  
+      .hero-divider {
+        width: 50px;
+        height: 5px;
+        margin: 20px auto; /* Centre le trait horizontal */
+      }
+  
+      .hero-text-center .dynamic-text {
+        font-size: 1.2rem;
+      }
+  
+      .hero-image {
+        text-align: center;
+        margin-top: 20px;
+      }
+    }
+  
+    @media (max-width: 576px) {
+      .hero-text-left h2 {
+        font-size: 1.8rem;
+      }
+  
+      .hero-text-left p {
+        font-size: 1rem;
+      }
+  
+      .hero-text-center .dynamic-text {
+        font-size: 1rem;
+      }
+    }
+  </style>
+  
+</head>
+<body>
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text-left">
+        <h2>Bienvenue sur LearnTrack</h2>
+        <p>Accédez à une bibliothèque pédagogique diversifiée, conçue pour enrichir vos connaissances.</p>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-text-center">
+        <p class="dynamic-text">Nous vous aidons à <span class="typed-text"></span></p>
+      </div>
+      <div class="hero-image">
+        <img src="assets/image.png" alt="Illustration" />
+      </div>
+    </div>
+  
+    <!-- Carte de recherche centrée en bas -->
+    <div class="hero-search-card">
+      <input type="text" class="search-bar" placeholder="Rechercher un document par domaine ou spécialité">
+    </div>
+  </section>
+  
+  <script>
+const words = ["explorer", "apprendre", "réussir"];
+let currentIndex = 0;
+let currentWord = "";
+let currentCharIndex = 0;
+
+function typeText() {
+  const typedTextElement = document.querySelector(".typed-text");
+  
+  if (currentCharIndex < words[currentIndex].length) {
+    currentWord += words[currentIndex][currentCharIndex];
+    typedTextElement.textContent = currentWord + "|"; // Ajoute un curseur visuel
+    currentCharIndex++;
+    setTimeout(typeText, 100); // Vitesse de saisie
+  } else {
+    setTimeout(eraseText, 1000); // Pause avant l'effacement
+  }
+}
+
+function eraseText() {
+  const typedTextElement = document.querySelector(".typed-text");
+  
+  if (currentCharIndex > 0) {
+    currentWord = currentWord.slice(0, -1);
+    typedTextElement.textContent = currentWord + "|"; // Ajoute un curseur visuel
+    currentCharIndex--;
+    setTimeout(eraseText, 100); // Vitesse d'effacement
+  } else {
+    currentIndex = (currentIndex + 1) % words.length; // Passe au mot suivant
+    setTimeout(typeText, 500); // Pause avant de recommencer
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  typeText();
+});
+
+
+  </script>
+</body>
+</html>

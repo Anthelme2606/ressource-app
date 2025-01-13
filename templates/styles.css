@@ -1,0 +1,14 @@
+:root {
+    --primary-blue: #2A77D1;
+    --secondary-green: #4CAF50; 
+    --background-light: #F4F6F9; 
+    --text-dark: #333333; 
+    --text-muted: #757575; 
+    --highlight-yellow: #FFC107; 
+    --button-hover: #1A5CB7; 
+    --footer-gray: #E0E0E0; 
+  }
+  /**Navbar***/
+  .navbar {
+ width: 100%;
+  }  

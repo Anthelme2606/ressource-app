@@ -1,0 +1,86 @@
+.buy-card {
+    background: linear-gradient(90deg, var(--orange, #FFCC80), var(--blue-v, #3A4DA0));
+    color: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    margin-bottom: 60px;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .buy-card-content {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .card-item {
+    text-align: center;
+    flex: 1;
+  }
+  
+  .label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  .value {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .button-container {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .buy-button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--orange, #FFCC80);
+    color: var(--blue-v, #3A4DA0);
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .buy-button:hover {
+    transform: scale(1.05);
+  }
+  
+  .wave-effect {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 200%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(-100%);
+    animation: wave 2s infinite;
+  }
+  
+  @keyframes wave {
+    0% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  

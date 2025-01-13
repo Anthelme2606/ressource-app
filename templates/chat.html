@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte de Commentaires Professionnelle</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    :root {
+    --primary-color: #0070f3;
+    --background-color: #ffffff;
+    --text-color: #333333;
+    --border-color: #e0e0e0;
+    --hover-color: #f5f5f5;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.5;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+.open-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+.open-button:hover {
+    background-color: #0056b3;
+}
+
+.comment-card {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(100% - 30px);
+    background-color: var(--background-color);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: #f8f9fa;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.comments-container {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.comments-area {
+    padding: 16px;
+}
+
+.comment {
+    display: flex;
+    margin-bottom: 16px;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
+.comment:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+}
+
+.comment-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.comment-content {
+    flex: 1;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.comment-author {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.comment-timestamp {
+    font-size: 12px;
+    color: #7f8c8d;
+}
+
+.comment-text {
+    font-size: 14px;
+    color: #34495e;
+}
+
+.comment-form-container {
+    border-top: 1px solid var(--border-color);
+    padding: 16px;
+    background-color: var(--background-color);
+}
+
+.comment-form, .reply-form {
+    display: flex;
+}
+
+.textarea-container {
+    position: relative;
+    flex-grow: 1;
+}
+
+textarea {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    resize: none;
+    font-size: 14px;
+    line-height: 1.5;
+    max-height: 150px;
+    transition: border-color 0.3s ease;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
+}
+
+.send-button {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.send-button:hover {
+    background-color: rgba(0, 112, 243, 0.1);
+}
+
+.send-button svg {
+    width: 20px;
+    height: 20px;
+    color: var(--primary-color);
+}
+
+.reply-card {
+    display: none;
+    position: absolute;
+    width: 300px;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 200;
+}
+
+.reply-card-content {
+    padding: 16px;
+}
+
+.reply-title {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.reply-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.reply-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    margin: 0 8px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.reply-button:hover {
+    background-color: var(--hover-color);
+}
+
+.reply-button svg {
+    width: 24px;
+    height: 24px;
+    color: #7f8c8d;
+}
+
+.file-button svg, .image-button svg {
+    transition: color 0.3s ease;
+}
+
+.file-button:hover svg, .image-button:hover svg {
+    color: var(--primary-color);
+}
+
+.replies {
+    margin-top: 8px;
+    padding-left: 20px;
+    border-left: 2px solid var(--border-color);
+}
+
+.reply {
+    margin-bottom: 8px;
+    padding: 8px;
+    background-color: #f1f3f5;
+    border-radius: 4px;
+}
+
+.reply-file, .reply-image {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #5c7080;
+}
+
+.reply-image {
+    max-width: 100%;
+    border-radius: 4px;
+}
+
+
+
+    </style>
+</head>
+<body>
+    <button id="openComments" class="open-button">Commenter</button>
+
+    <div id="commentCard" class="comment-card">
+        <div class="card-content">
+            <header class="card-header">
+                <h2 class="card-title">Commentaires</h2>
+            </header>
+            <div class="comments-container">
+                <div id="commentsArea" class="comments-area"></div>
+            </div>
+            <div class="comment-form-container">
+                <form id="commentForm" class="comment-form">
+                    <div class="textarea-container">
+                        <textarea id="newComment" placeholder="Écrivez votre commentaire..." rows="1"></textarea>
+                        <button type="submit" class="send-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="replyCard" class="reply-card">
+        <div class="reply-card-content">
+            <h3 class="reply-title">Répondre au commentaire</h3>
+            <div class="reply-buttons">
+                <button class="reply-button file-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                        <polyline points="13 2 13 9 20 9"></polyline>
+                    </svg>
+                </button>
+                <button class="reply-button image-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                </button>
+            </div>
+            <form id="replyForm" class="reply-form">
+                <div class="textarea-container">
+                    <textarea id="replyComment" placeholder="Écrivez votre réponse..." rows="1"></textarea>
+                    <button type="submit" class="send-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <input type="file" id="fileInput" style="display: none;" multiple>
+    <input type="file" id="imageInput" style="display: none;" accept="image/*" multiple>
+
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const openButton = document.getElementById('openComments');
+    const commentCard = document.getElementById('commentCard');
+    const commentsArea = document.getElementById('commentsArea');
+    const commentForm = document.getElementById('commentForm');
+    const newCommentTextarea = document.getElementById('newComment');
+    const replyCard = document.getElementById('replyCard');
+    const replyForm = document.getElementById('replyForm');
+    const replyCommentTextarea = document.getElementById('replyComment');
+    const fileInput = document.getElementById('fileInput');
+    const imageInput = document.getElementById('imageInput');
+
+    let comments = [
+        {
+            id: 1,
+            author: "Alice Johnson",
+            avatar: "https://via.placeholder.com/40",
+            content: "Great post! I really enjoyed reading this.",
+            timestamp: "2 hours ago",
+            replies: []
+        },
+        {
+            id: 2,
+            author: "Bob Smith",
+            avatar: "https://via.placeholder.com/40",
+            content: "I have a question about the third point. Can you elaborate?",
+            timestamp: "1 hour ago",
+            replies: []
+        }
+    ];
+
+    let currentReplyTo = null;
+
+    function renderComments() {
+        commentsArea.innerHTML = comments.map(comment => `
+            <div class="comment" data-comment-id="${comment.id}">
+                <img src="${comment.avatar}" alt="${comment.author}" class="comment-avatar">
+                <div class="comment-content">
+                    <div class="comment-header">
+                        <span class="comment-author">${comment.author}</span>
+                        <span class="comment-timestamp">${comment.timestamp}</span>
+                    </div>
+                    <p class="comment-text">${comment.content}</p>
+                    ${renderReplies(comment.replies)}
+                </div>
+            </div>
+        `).join('');
+        commentsArea.scrollTop = commentsArea.scrollHeight;
+    }
+
+    function renderReplies(replies) {
+        if (replies.length === 0) return '';
+        return `
+            <div class="replies">
+                ${replies.map(reply => `
+                    <div class="reply">
+                        <div class="comment-header">
+                            <span class="comment-author">${reply.author}</span>
+                            <span class="comment-timestamp">${reply.timestamp}</span>
+                        </div>
+                        <p class="comment-text">${reply.content}</p>
+                        ${reply.file ? `<p class="reply-file">File: ${reply.file}</p>` : ''}
+                        ${reply.image ? `<img src="${reply.image}" alt="Reply image" class="reply-image">` : ''}
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    function addComment(content) {
+        const newComment = {
+            id: comments.length + 1,
+            author: "Current User",
+            avatar: "https://via.placeholder.com/40",
+            content: content,
+            timestamp: "Just now",
+            replies: []
+        };
+        comments.push(newComment);
+        renderComments();
+    }
+
+    function addReply(commentId, content, file = null, image = null) {
+        const comment = comments.find(c => c.id === commentId);
+        if (comment) {
+            comment.replies.push({
+                author: "Current User",
+                content: content,
+                timestamp: "Just now",
+                file: file,
+                image: image
+            });
+            renderComments();
+        }
+    }
+
+    openButton.addEventListener('click', () => {
+        commentCard.style.display = 'block';
+        renderComments();
+    });
+
+    commentCard.addEventListener('click', (e) => {
+        if (e.target === commentCard) {
+            commentCard.style.display = 'none';
+            replyCard.style.display = 'none';
+        }
+    });
+
+    commentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const content = newCommentTextarea.value.trim();
+        if (content) {
+            addComment(content);
+            newCommentTextarea.value = '';
+            adjustTextareaHeight(newCommentTextarea);
+        }
+    });
+
+    replyForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const content = replyCommentTextarea.value.trim();
+        if (content && currentReplyTo) {
+            addReply(currentReplyTo, content);
+            replyCommentTextarea.value = '';
+            adjustTextareaHeight(replyCommentTextarea);
+            replyCard.style.display = 'none';
+        }
+    });
+
+    commentsArea.addEventListener('click', (e) => {
+        const comment = e.target.closest('.comment');
+        if (comment) {
+            const commentId = parseInt(comment.dataset.commentId);
+            currentReplyTo = commentId;
+            
+            const rect = comment.getBoundingClientRect();
+            replyCard.style.top = `${rect.bottom + window.scrollY}px`;
+            replyCard.style.left = `${rect.left + window.scrollX}px`;
+            
+            replyCard.style.display = 'block';
+            replyCommentTextarea.focus();
+        }
+    });
+
+    document.querySelector('.file-button').addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    document.querySelector('.image-button').addEventListener('click', () => {
+        imageInput.click();
+    });
+
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0 && currentReplyTo) {
+            const fileName = e.target.files[0].name;
+            addReply(currentReplyTo, `File uploaded: ${fileName}`, fileName);
+            replyCard.style.display = 'none';
+        }
+    });
+
+    imageInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0 && currentReplyTo) {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                addReply(currentReplyTo, 'Image uploaded', null, event.target.result);
+                replyCard.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    function adjustTextareaHeight(textarea) {
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
+    }
+
+    newCommentTextarea.addEventListener('input', () => adjustTextareaHeight(newCommentTextarea));
+    replyCommentTextarea.addEventListener('input', () => adjustTextareaHeight(replyCommentTextarea));
+
+    newCommentTextarea.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            commentForm.dispatchEvent(new Event('submit'));
+        }
+    });
+
+    replyCommentTextarea.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            replyForm.dispatchEvent(new Event('submit'));
+        }
+    });
+
+    renderComments();
+});
+
+
+    </script>
+</body>
+</html>
+

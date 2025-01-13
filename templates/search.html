@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil avec Abonnement</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+  <style>
+    .profile-container {
+      position: relative;
+      width: 60px;
+      height: 60px;
+    }
+
+    .profile-image {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ddd;
+    }
+
+    .subscribe-icon  {
+      position: absolute;
+      bottom: -5px;
+      right: -5px;
+      font-size: 18px;
+      background-color: white;
+      color: blueviolet;
+      width:25px ;
+      height: 25px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* border: 2px solid blueviolet; */
+      padding: 5px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    /* .subscribe-icon:hover {
+      transform: scale(1.1);
+    } */
+  </style>
+</head>
+<body class="d-flex justify-content-center align-items-center vh-100">
+  <div class="profile-container">
+    <img src="https://via.placeholder.com/60" alt="Profile" class="profile-image">
+    <span class="subscribe-icon" title="S'abonner">
+      <i class="bi bi-plus"></i>
+    </span>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

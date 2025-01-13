@@ -1,0 +1,82 @@
+/* Ensure the sidebar is fixed to the bottom */
+.mobile-sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--white);
+    color: var(--black) !important;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+  }
+  
+  /* Style the items inside the sidebar */
+  .mobile-items {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    margin: 0;
+    list-style: none;
+    background-color: #f8f9fa;
+  }
+  
+  /* Style for each individual item */
+  .mobile-item {
+    text-align: center;
+    flex-grow: 1;
+  }
+  
+  .icon-circle-mobile {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--big-gray);
+    color: var(--green) !important;
+    
+    font-weight: bold !important;
+    text-align: center !important;
+    line-height: 40px;
+    
+  }
+  
+  .mobile-item i {
+    color:var(--green) !important;
+    font-size: 20px;
+  }
+  
+  /* Dropdown menu when hovering over the collection item */
+  .dropdown-menu {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+  }
+  
+  .dropdown-link {
+    text-decoration: none;
+    color: #007bff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .dropdown-link i {
+    margin-right: 10px;
+  }
+  
+  /* Hover effect for links */
+  .dropdown-link:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Adjust the styling for the icons and links */
+  .dropdown-link:hover i {
+    color: #0056b3;
+  }
+  
