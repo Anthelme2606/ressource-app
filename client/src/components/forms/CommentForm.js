@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
+import useSubmitOnEnter from '../../hooks/UseSubmitEnter';
 
-const CommentForm = ({ onSubmit }) => {
-  const [message, setMessage] = useState(''); 
-  const isSendButtonDisabled = !message.trim(); // Désactive le bouton si le champ est vide.
+const CommentForm = ({ onSubmit, message, setMessage }) => {
+  const isSendButtonDisabled = !message.trim(); // Désactive le bouton si le champ est vide
 
-  
+  // Appel du hook pour gérer la soumission lors de l'appui sur Enter
+  useSubmitOnEnter(onSubmit);
 
   return (
     <form className="comment-form" onSubmit={onSubmit}>
@@ -12,12 +13,12 @@ const CommentForm = ({ onSubmit }) => {
         <textarea
           placeholder="Écrivez votre commentaire..."
           rows="1"
-          value={message} 
-          onChange={(e) => setMessage(e.target.value)} 
+          value={message} // Utilise la valeur venant du parent
+          onChange={(e) => setMessage(e.target.value)} // Met à jour l'état du parent
         ></textarea>
         <button 
           type="submit" 
-          disabled={isSendButtonDisabled}
+          disabled={isSendButtonDisabled} // Désactive le bouton si le message est vide
           className="send-button"
         >
           <svg

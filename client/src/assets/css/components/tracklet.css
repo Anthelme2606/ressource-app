@@ -3,8 +3,8 @@
     background-color: var(--white);
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 24px;
-    max-width: 700px;
+    padding: 160px;
+    max-width: 1200px;
     width: 100%;
     
     position: relative;
@@ -83,9 +83,10 @@
     background-color: #ef4444;
     /* background-color: #FFD700 !important; */
     color: white;
-    font-size: 6px !important;
-    width: 20px;
-    height: 20px;
+    font-size: 12px !important;
+    font-weight: bold;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     display: flex;
     justify-content: center;

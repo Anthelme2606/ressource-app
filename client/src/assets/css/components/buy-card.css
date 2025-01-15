@@ -1,7 +1,7 @@
 .buy-card {
     background: linear-gradient(90deg, var(--orange, #FFCC80), var(--blue-v, #3A4DA0));
     color: #fff;
-    padding: 1rem;
+    padding: 4rem;
     border-radius: 10px;
     position: relative;
     overflow: hidden;

@@ -1,6 +1,6 @@
 
 .sidebar-container {
-    width: 250px;
+    width: 320px;
     /* background-color: #3A4DA0; */
     background-color: var(--white);
     color: var(--black) !important;

@@ -9,6 +9,7 @@ import ReplyingForm from "../forms/ReplyingForm";
 const CommentCard = ({ openComment }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [comments, setComments] = useState([]);
+  const [message, setMessage] = useState(''); // état pour le message
   const [replyTo, setReplyTo] = useState(null); // Stocker l'index du commentaire pour lequel une réponse est ouverte
   const cardRef = useRef(null);
   const replyRef = useRef(null);
@@ -23,20 +24,22 @@ const CommentCard = ({ openComment }) => {
 
   useOutsideClick(cardRef, isOpen, () => setIsOpen(false));
 
+
+
   const addComment = (e) => {
-    e.preventDefault();
-    console.log(e);
-    const newComment = {
-      avatar: hero,
-      author: "User",
-      timestamp: new Date().toLocaleTimeString(),
-      text: e.target.elements[0].value,
-      replies: [],
-    };
-    setComments([...comments, newComment]);
-   
-    e.target.reset();
-    
+    e.preventDefault(); // Empêche le comportement par défaut du formulaire
+
+    if (message.trim()) {
+      const newComment = {
+        avatar: hero,
+        author: 'User',
+        timestamp: new Date().toLocaleTimeString(),
+        text: message,
+        replies: [],
+      };
+      setComments([...comments, newComment]);
+      setMessage(''); // Réinitialise le champ de message
+    }
   };
 
   const toggleReply = (index) => {
@@ -47,30 +50,38 @@ const CommentCard = ({ openComment }) => {
     setReplyTo(null);
   };
 
-  const handleReply = (e,index) => {
+  const handleReply = (e, index) => {
     e.preventDefault();
-   
-   
-    const replyData={};
+    
     const updatedComments = [...comments];
-
+    const replyData = {
+      avatar: hero,
+      author: "User",
+      timestamp: new Date().toLocaleTimeString(),
+    };
+  
+    // Si les réponses n'existent pas encore, initialisez-les
     if (!Array.isArray(updatedComments[index].replies)) {
       updatedComments[index].replies = [];
     }
-    const fileSelected=e.target.elements[3]?.value || e.target.elements[4]?.value;
-    console.log(fileSelected);
+  
+    // Récupérez les éléments du formulaire explicitement
+    const textElement = e.target.querySelector('textarea'); // Récupère le message depuis le textarea
+    const fileInput1 = e.target.querySelector('#fileInput'); // Récupère le fichier 1
+    const fileInput2 = e.target.querySelector('#imageInput'); // Récupère le fichier 2
+    
+    const fileSelected = (fileInput1 && fileInput1.files[0]) || (fileInput2 && fileInput2.files[0]); // Sélectionne un fichier
+    
     updatedComments[index].replies.push({
-      avatar:hero, 
-      author: "User", 
-      timestamp: new Date().toLocaleTimeString(),
-      text: e.target.elements[0].value,
-      file:fileSelected,
-     // file: e.target.elements[3] || e.target.elements[4] ? URL.createObjectURL(e.target.elements[3]|| e.target.elements[4]) : 'file miss selection',
+      ...replyData,
+      text: textElement ? textElement.value : '', // Récupère le texte du textarea
+      file: fileSelected ? fileSelected.name : '', // Si un fichier est sélectionné, récupère son nom
     });
-
+  
     setComments(updatedComments);
-    setReplyTo(null);
+    setReplyTo(null); // Réinitialise la réponse en cours
   };
+  
 
   return (
     <div
@@ -142,7 +153,11 @@ const CommentCard = ({ openComment }) => {
           </div>
         </div>
         <div className="comment-form-container">
-          <CommentForm onSubmit={(event)=>addComment (event)} />
+        <CommentForm 
+        onSubmit={addComment} 
+        message={message} 
+        setMessage={setMessage} 
+      />
         </div>
       </div>
     </div>

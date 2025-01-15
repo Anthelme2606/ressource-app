@@ -156,7 +156,7 @@ a.link:hover{
   margin-top: 50px;
   flex: 1; 
   padding: 1rem;
-  margin-left: 250px; 
+  margin-left: 320px; 
   
   overflow-y: auto; 
   display: flex;
@@ -185,6 +185,12 @@ justify-content: center;
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .track-card {
+    
+      padding: 35px !important;
+      
+      
+  }
   .dashboard-layout {
       flex-direction: column;
   }
