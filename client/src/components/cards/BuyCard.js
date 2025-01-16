@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/css/components/buy-card.css";
+import "../../assets/css/components/buy-card.css";
 
 const BuyCard = ({ quantity, netPrice, promotion = 0 }) => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import "../assets/css/components/education-card.css";
+import "../../assets/css/components/education-card.css";
 const EducationCards = () => {
   return (
     <Container>

@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "../assets/css/components/sidebar.css";
-import BuyCard from "./BuyCard";
+import BuyCard from './cards/BuyCard'
 import ROUTES from "../app/routes/names";
 import useActiveLink from "../hooks/UseActiveLink";
 

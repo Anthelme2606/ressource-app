@@ -1,7 +1,7 @@
 const ROUTES={
     HOME:'/',
     TRACKOPEDIE:'/trackopedie',
-    LOGIN:'connexion',
+    LOGIN:'/connexion',
     SIGNUP:'/inscription',
     
     };

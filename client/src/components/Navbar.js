@@ -64,7 +64,7 @@ const Navbar = () => {
               <NavLink
                 to={ROUTES.LOGIN}
                 className={({ isActive }) =>
-                  `nav-link btn-custom font-bold ${isActive ? "btn-active" : ""}`
+                  `nav-link btn-custom font-bold ${isActive ? "text-orange-primary" : ""}`
                 }
               >
                 Se connecter
@@ -74,7 +74,7 @@ const Navbar = () => {
               <NavLink
                 to={ROUTES.SIGNUP}
                 className={({ isActive }) =>
-                  `nav-link btn-custom font-bold ${isActive ? "btn-active" : ""}`
+                  `nav-link btn-custom font-bold ${isActive ?"text-orange-primary" : ""}`
                 }
               >
                 S'inscrire
