@@ -1,19 +1,55 @@
 
 .sidebar-container {
-    width: 320px;
-    /* background-color: #3A4DA0; */
-    background-color: var(--white);
-    color: var(--black) !important;
-    position: fixed;
-    left: 0;
-    top: 50px;
-    height: 100vh;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    scrollbar-width: thin; 
-    scrollbar-color: var(--big-gray) var(--gray);
+  background-color: var(--white);
+  color: var(--black) !important;
+  position: fixed;
+  left: 0;
+  top: 50px;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: var(--big-gray) var(--gray);
+  /* width: 280px;  */
+}
+
+@media (max-width: 575.98px) {
+  .sidebar-container {
+    width: 60px;
   }
+} 
+
+ @media (min-width: 576px) and (max-width: 767.98px) {
+  .sidebar-container {
+    width: 240px;
+  }
+} 
+
+ @media (min-width: 768px) and (max-width: 991.98px) {
+  .sidebar-container {
+    width: 260px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .sidebar-container {
+    width: 300px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+  .sidebar-container {
+    width: 280px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .sidebar-container {
+    width: 360px;
+  }
+} 
+
   
   .sidebar {
     padding: 20px;
@@ -42,7 +78,7 @@
   .side-item:hover {
     background-color: var(--honey-green);
     border-radius: 8px;
-    /* padding: 5px; */
+    /* padding: 5px; side */
   }
   
   .icon-circle {

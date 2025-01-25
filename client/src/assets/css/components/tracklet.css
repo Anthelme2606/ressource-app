@@ -1,15 +1,21 @@
 .track-card {
-  margin-top: 30px;
-    background-color: var(--white);
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 160px;
-    max-width: 1200px;
-    width: 100%;
-    
-    position: relative;
-    
+  margin: 30px auto; /* Centrer horizontalement */
+  background-color: var(--white);
+  border-radius: 12px; /* Augmenter légèrement les coins arrondis */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1); /* Plus douce et réaliste */
+  padding: 24px 20px; /* Plus d'espace vertical pour respirer */
+  max-width: 720px; /* Réduit légèrement pour mieux s'adapter à la plupart des écrans */
+  width: calc(100% - 40px); /* Laisse 20px de marge latérale de chaque côté */
+  position: relative;
+  overflow: hidden; /* Empêche les débordements des éléments internes */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; 
 }
+
+.track-card:hover {
+  transform: translateY(-1px); 
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2); 
+}
+
 .tracklet-container {
   scroll-snap-type: y mandatory; 
 }
